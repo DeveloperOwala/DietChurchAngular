@@ -3,7 +3,6 @@ import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,9 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  title = 'DIET OF THE WORD CHURCH';
-  dataSource!:MatTableDataSource<Employee>
-  searchText!: string;
+    title = 'DIET OF THE WORD CHURCH';
   employees!: Employee[];
   totalRecords: number = 0;
   pagination: number = 1;
@@ -62,14 +59,14 @@ export class EmployeeListComponent implements OnInit {
       this.pagination = 1;
       this.getEmployees();
     }
-   applyFilter(event:Event){
+   /* applyFilter(event:Event){
       const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+      this.employees.filter = filterValue.trim().toLocaleLowerCase();
 
-      if(this.dataSource.pagination){
-        this.dataSource.pagination.firstPage();
+      if(this.datasource.pagination){
+        this.datasource.pagination.firstPage();
       }
-    }
+    }*/
   }
   
 

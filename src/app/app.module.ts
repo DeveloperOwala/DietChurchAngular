@@ -15,7 +15,6 @@ import {MatPaginatorModule} from '@angular/material/paginator'
 import {MatSortModule} from '@angular/material/sort'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
-import {MatTableDataSource} from '@angular/material/table'
 // search module
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
@@ -39,8 +38,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    Ng2SearchPipeModule,
-    MatTableDataSource
+    Ng2SearchPipeModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
