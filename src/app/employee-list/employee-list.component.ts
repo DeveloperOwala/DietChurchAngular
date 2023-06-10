@@ -3,6 +3,7 @@ import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,23 +11,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
+  title = 'DIET OF THE WORD CHURCH';
+  dataSource!:MatTableDataSource<Employee>
+  searchText!: string;
   employees!: Employee[];
+  totalRecords: number = 0;
+  pagination: number = 1;
 
-  constructor(private employeeService:EmployeeService, private router: Router) { }
+  constructor(private employeeService:EmployeeService, private router: Router) { 
+    this.employees = new Array();
+  }
 
   ngOnInit()  {
     this.getEmployees();
   }
   getEmployees(): void{
     this.employeeService.getEmployeeList().subscribe(
-      (response:Employee[]) => {
+     (response:Employee[]) => {
         this.employees = response;
+        this.totalRecords= response.length;
       }
     ),
     (error : HttpErrorResponse) => {
       alert(error.message);
     }
      
+    }
+    renderPage(event: number) {
+      this.pagination = event;
+      this.getEmployees();
     }
     updateEmployee(id:number){
       this.router.navigate(['update-employee', id]);
@@ -39,6 +52,23 @@ export class EmployeeListComponent implements OnInit {
     }
     employeeDetails(id:number){
       this.router.navigate([`employee-details`, id])
+    }
+    onTableDataChange(event: any) {
+      this.pagination = event;
+      this.getEmployees();
+    }
+    onTableSizeChange(event: any): void {
+      this.totalRecords = event.target.value;
+      this.pagination = 1;
+      this.getEmployees();
+    }
+   applyFilter(event:Event){
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+
+      if(this.dataSource.pagination){
+        this.dataSource.pagination.firstPage();
+      }
     }
   }
   

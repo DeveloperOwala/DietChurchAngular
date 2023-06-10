@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../employee';
-
 import { EmployeeListComponent } from '../employee-list/employee-list.component';
 import { EmployeeService } from '../employee.service';
 
@@ -12,7 +11,7 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
-
+  title = 'DIET OF THE WORD CHURCH';
   employee: Employee = new Employee();
   
   constructor(private employeeService:EmployeeService, private router:Router) { }

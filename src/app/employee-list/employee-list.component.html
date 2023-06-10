@@ -1,24 +1,55 @@
-<h2>DIET OF THE WORD CHURCH</h2>
+
+<div class="container">
+<div class="container text-center">
+  <h1>{{title}}</h1>
+</div>
+<!--div class="search-hero">
+     <input class="form-control" type="text" 
+     name="search" [(ngModel)]="searchText" autocomplete="off" 
+     placeholder="&#61442;  search here">
+</div-->
+<div class="searchText">
+  <mat-form-field appearance="standard">
+  <mat-label>Search here </mat-label>
+  <input matInput placeholder="" search/>
+</mat-form-field>
+</div>
+
+
 <table class="table table-striped">
     <thead>
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Phone Number</th>
+        <th>Date Created</th>
         <th> Actions </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor ="let employee of employees">
+      <tr *ngFor ="let employee of employees | paginate : {id:'listing_pagination', itemsPerPage : 7, currentPage:pagination,totalItems:totalRecords}">
           <td>{{ employee.firstName}}</td>
           <td>{{ employee.lastName}}</td>
-          <td>{{ employee.emailID}}</td>
+          <td>{{ employee.phoneNumber}}</td>
           <td>
             <button (click) = "employeeDetails(employee.id)" class="btn btn-success" > View </button>
             <button (click) = "updateEmployee(employee.id)" class="btn btn-info" style="margin-left: 10px;"> Update </button>
             <button (click) = "deleteEmployee(employee.id)" class="btn btn-danger" style="margin-left: 10px;"> Delete </button>
-
           </td>
       </tr>
     </tbody>
+    <tr>
+      <td class="mat-cell" colspan="4"> Member not found in church database
+       <!-- {{input.value}}-->  
+      </td>
+    </tr>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+    (pageChange)="onTableDataChange($event)"
+      previousLabel="Prev"
+      nextLabel="Next"
+    >
+    </pagination-controls>
+    
+  </div>
+</div>
